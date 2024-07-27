@@ -1,0 +1,98 @@
+
+RELEASE NOTES OF LARAVEL SMARK
+BY MARK JASON ESPELITA
+
+***** INTRODUCTION *****
+
+./release_notes.txt - containing updates and changes.
+
+./.htaccess
+
+./.env
+    - reverb
+    - app env -> LOCAL
+    - mail -> LOCAL
+    - database -> LOCAL
+
+./composer.json
+    "php": "^8.2",
+    "filament/filament": "^3.2",
+    "laravel/framework": "^11.9",
+    "laravel/jetstream": "^5.1",
+    "laravel/pulse": "^1.2",
+    "laravel/reverb": "^1.0",
+    "laravel/sanctum": "^4.0",
+    "laravel/tinker": "^2.9",
+    "livewire/livewire": "^3.0",
+    "tecnickcom/tcpdf": "^6.7"
+
+
+***** COMMANDS *****
+
+./app/Console/Commands/SmarkTest.php
+
+
+***** EVENTS *****
+
+./app/Events/SampleEvent.
+
+
+***** FILAMENT *****
+
+./app/Filament/Resources/RolesResource.php
+./app/Filament/Resources/UserResource.php
+./app/Filament/Widgets/SampleChart.php
+./app/Filament/Widgets/SampleLineChart.php
+./app/Filament/Widgets/UserManagementWidget.php
+
+
+***** MAIL *****
+
+./app/Mail/TestMail.php
+
+
+***** MODELS *****
+
+./app/Models/Activities.php
+./app/Models/Roles.php
+./app/Models/User.php
+
+
+***** POLICIES *****
+
+./app/Policies/ActivitiesPolicy.php
+./app/Policies/RolesPolicy.php
+
+
+***** FILAMENT THEMES *****
+
+'danger' => Color::Rose,
+'gray' => Color::Gray,
+'info' => Color::Blue,
+'primary' => Color::Indigo,
+'success' => Color::Emerald,
+'warning' => Color::Orange,
+
+
+***** SMARK *****
+
+compute()
+isEven()
+linearRegression()
+downloadExcel()
+downloadExcelAs()
+withUrl()
+jsonRead()
+jsonPush()
+jsonUnshift()
+jsonUpdate()
+jsonDelete()
+calculateTotalPrice()
+calculateBMI()
+generateQRCode()
+generateBarCode()
+sendMail()
+log()
+upload()
+removeFile()
+SmarkPDF::export() -> modify library
