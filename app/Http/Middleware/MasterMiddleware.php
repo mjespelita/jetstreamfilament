@@ -16,7 +16,7 @@ class MasterMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == 1) {
+        if (Auth::user()->role === 1) {
             return redirect('/admin');
         }
         return $next($request);
