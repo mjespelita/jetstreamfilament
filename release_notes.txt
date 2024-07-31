@@ -75,7 +75,6 @@ BY MARK JASON ESPELITA
 
 
 ***** SMARK *****
-
 compute()
 isEven()
 linearRegression()
@@ -98,5 +97,10 @@ log()
 upload()
 removeFile()
 SmarkPDF::export() -> modify library
-paymongoCreatePaymentLink()
 _upload()
+
+***** SMARK2 *****
+paymongoCreatePaymentLink()
+generateReceiptNumber()
+encrypter()
+decrypter()

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Smark\Smark;
+use App\Smark\Smark2;
 use App\Smark\SmarkPDF;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Smark::class, function ($app) {
             return SmarkPDF::class;
+        });
+
+        $this->app->singleton(Smark::class, function ($app) {
+            return Smark2::class;
         });
     }
 
