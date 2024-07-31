@@ -6,7 +6,7 @@
 
         <title>{{ $title ?? 'Page Title' }}</title>
 
-        <link rel="stylesheet" href="{{ url('build/assets/app-YipPcfjU.css') }}">
+        <link rel="stylesheet" href="{{ url('build/assets/app-CKF9trwW.css') }}">
         <script src="{{ url('build/assets/app-58r_jytx.js') }}"></script>
     </head>
     <body>
