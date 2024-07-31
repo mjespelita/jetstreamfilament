@@ -139,6 +139,28 @@ class Smark
         return $xlsx->downloadAs($filename.'.'.'xlsx');
     }
 
+    public static function _downloadExcel($excelArray, $source)
+    {
+        require 'excel/PhpXlsxGenerator.php';
+
+        foreach ($source as $key => $value) {
+            array_push($excelArray, $value);
+        }
+        $xlsx = PhpXlsxGenerator::fromArray($excelArray);
+        $filename = uniqid('', true).'.'.'xlsx';
+        return $xlsx->downloadAs($filename);
+    }
+
+    public static function _downloadExcelAs($filename, $excelArray, $source)
+    {
+        require 'excel/PhpXlsxGenerator.php';
+        foreach ($source as $key => $value) {
+            array_push($excelArray, $value);
+        }
+        $xlsx = PhpXlsxGenerator::fromArray($excelArray);
+        return $xlsx->downloadAs($filename.'.'.'xlsx');
+    }
+
     // url highlighter
 
     public static function withUrl($string)
