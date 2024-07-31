@@ -98,3 +98,5 @@ log()
 upload()
 removeFile()
 SmarkPDF::export() -> modify library
+paymongoCreatePaymentLink()
+_upload()

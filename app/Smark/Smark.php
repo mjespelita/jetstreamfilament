@@ -6,6 +6,7 @@ use App\Models\Activities;
 use App\Smark\DB\DB; // for database connection
 use chillerlan\QRCode\QRCode; // for qrcode
 use CodexWorld\PhpXlsxGenerator; // for export report
+use GuzzleHttp\Client;
 use PHPMailer\PHPMailer\PHPMailer; // for mail
 use PHPMailer\PHPMailer\SMTP; // for mail
 use PHPMailer\PHPMailer\Exception; // for mail
@@ -438,5 +439,74 @@ class Smark
     public static function removeFile($path)
     {
         return unlink($path);
+    }
+
+    // payments
+
+    public static function paymongoCreatePaymentLink($paymentDetails)
+    {
+
+        /**
+         *  let data = {
+         *       "data":{
+         *           "attributes": {
+         *               "amount":10000,
+         *               "description":"Sample Course",
+         *               "remarks":"Your Paragraph text goes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolore, alias, numquam enim ab voluptate id quam harum ducimus cupiditate similique quisquam et deserunt, recusandae. here"
+         *           }
+         *       }
+         *   };
+         *
+         *   Api Link: https://api.mydomain.com/
+         */
+
+        $data = $paymentDetails;
+        $client = new Client();
+
+        // Check if 'amount' is numeric and convert to integer if it is
+        if (isset($data['attributes']['amount']) && is_numeric($data['attributes']['amount'])) {
+            $data['attributes']['amount'] = (int) $data['attributes']['amount'];
+        }
+
+        // Convert the data structure to a JSON string
+        $jsonString = json_encode(["data" => $data], JSON_PRETTY_PRINT);
+
+        $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
+            'body' => $jsonString,
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Basic c2tfbGl2ZV9EM2JMblZMVXlFQ01Wc0pHUWVrc2VGWjE6',
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        return $response->getBody();
+    }
+
+    public static $_filename;
+
+    public static function _upload($filename_input, $file_path, $filename_valid_extension){
+        if(empty($filename_input)||empty($file_path)||empty($filename_valid_extension)){
+            echo "Invalid or incomplete argument.";
+        } else { // CHECKING FILE PATH
+            $check_file_path_if_valid = str_split($file_path);
+            if(end($check_file_path_if_valid) != '/'){
+                $file_path = $file_path.'/'; // IF END OF FILE IS NOT /, INSERT /
+            }
+            $filename_upload_extension = explode('.', $filename_input['name']);
+            $filename_upload_extension_lowercase = strtolower(end($filename_upload_extension));
+            if($filename_input['error'] === 0){
+                if(!in_array($filename_upload_extension_lowercase, $filename_valid_extension)){
+                    echo "Invalid file extension";
+                } else {
+                    $new_filename_generated = uniqid('file', true).'.'.$filename_upload_extension_lowercase;
+                    $new_file_upload_path = $file_path.$new_filename_generated;
+                    self::$filename = $new_filename_generated; // SET FILENAME TO BE ACCESSIBLE
+                    return move_uploaded_file($filename_input['tmp_name'], $new_file_upload_path); // SUCCESSFULLY UPLOADED
+                }
+            } else {
+                echo "There was an error uploading the file";
+            }
+        }
     }
 }
