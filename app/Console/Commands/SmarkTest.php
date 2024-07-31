@@ -34,12 +34,6 @@ class SmarkTest extends Command
 
         // broadcast(new SampleEvent);
 
-        $enc = Smark2::encrypter('Haha', 'mysecretkey');
-
-        $this->info('Encrypted: '.$enc);
-
-        $dec = Smark2::decrypter($enc, 'mysecretkey');
-
-        $this->info('Decrypted: '.$dec);
+        $this->info(Smark2::fibonacci(23));
     }
 }

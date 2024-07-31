@@ -2,6 +2,7 @@
 
 namespace App\Smark;
 
+use DateTime;
 use GuzzleHttp\Client;
 
 class Smark2
@@ -89,5 +90,70 @@ class Smark2
         $decrypted = openssl_decrypt($encrypted, $cipher, $key, 0, $iv);
 
         return $decrypted;
+    }
+
+    public static function toCamelCase($string) {
+        $result = strtolower($string);
+        preg_match_all('/[a-zA-Z0-9]+/', $result, $matches);
+        $result = '';
+        foreach ($matches[0] as $match) {
+            $result .= ucfirst($match);
+        }
+        return lcfirst($result);
+    }
+
+    public static function truncateString($string, $length) {
+        if (strlen($string) > $length) {
+            return substr($string, 0, $length) . '...';
+        }
+        return $string;
+    }
+
+    public static function flattenArray($array) {
+        $result = [];
+        array_walk_recursive($array, function($a) use (&$result) { $result[] = $a; });
+        return $result;
+    }
+
+    public static function uniqueMultidimensionalArray($array, $key) {
+        $temp_array = [];
+        $i = 0;
+        $key_array = [];
+
+        foreach ($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
+    }
+
+    public static function calculateAge($dob) {
+        $birthDate = new DateTime($dob);
+        $currentDate = new DateTime();
+        return $currentDate->diff($birthDate)->y;
+    }
+
+    public static function humanReadableDate($date) {
+        return date('F j, Y (l) g:i a', strtotime($date));
+    }
+
+    public static function sanitizeInput($input) {
+        return htmlspecialchars(strip_tags($input));
+    }
+
+    public static function factorial($number) {
+        if ($number < 2) {
+            return 1;
+        } else {
+            return ($number * self::factorial($number - 1));
+        }
+    }
+
+    public static function fibonacci($n) {
+        if ($n <= 1) return $n;
+        return self::fibonacci($n - 1) + self::fibonacci($n - 2);
     }
 }
