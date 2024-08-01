@@ -4,8 +4,8 @@ namespace App\Smark;
 
 use PDF;
 
-class SmarkPDF {
-
+class PDFer
+{
     public static function export($data)
     {
         require 'PDF.php';
@@ -85,5 +85,4 @@ class SmarkPDF {
         // Close and output PDF document
         $pdf->Output('example.pdf', 'I');
     }
-
 }
