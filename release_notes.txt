@@ -99,6 +99,7 @@ removeFile()
 SmarkPDF::export() -> modify library
 _upload()
 renderHTML()
+handleError()
 
 ***** SMARK2 *****
 paymongoCreatePaymentLink()
@@ -116,3 +117,5 @@ factorial()
 fibonacci()
 generateSlug()
 getWeekdays()
+filamentMonths()
+filamentYears()

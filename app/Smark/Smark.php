@@ -177,12 +177,14 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){ // IF FILE EXTENSION IS NOT JSON
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
+                // echo "File extension error. It must be a .json file.";
             } else {
                 return json_decode(file_get_contents($json_filename), true);
             }
         } else {
-            echo "File doesn't exists or filename extension error";
+            self::handleError("The file you are attempting to access either does not exist in the specified directory, or there has been an error related to the filename extension, preventing the system from recognizing the file type and subsequently accessing its contents.");
+            // echo "File doesn't exists or filename extension error";
         }
     }
 
@@ -191,7 +193,7 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){ // IF FILE EXTENSION IS NOT JSON
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
             } else {
                 if(empty(file_get_contents($json_filename))){ // IF THE CONTENT OF JSON FILE IS EMPTY
                     file_put_contents($json_filename, '[]');
@@ -212,7 +214,7 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
             } else {
                 file_put_contents($json_filename, '[]');
                 $json_file_decoded = json_decode(file_get_contents($json_filename), true);
@@ -229,7 +231,7 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){ // IF FILE EXTENSION IS NOT JSON
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
             } else {
                 if(empty(file_get_contents($json_filename))){ // IF THE CONTENT OF JSON FILE IS EMPTY
                     file_put_contents($json_filename, '[]');
@@ -250,7 +252,7 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
             } else {
                 file_put_contents($json_filename, '[]');
                 $json_file_decoded = json_decode(file_get_contents($json_filename), true);
@@ -267,7 +269,7 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){ // IF FILE EXTENSION IS NOT JSON
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
             } else {
                 $json_file_decoded = json_decode(file_get_contents($json_filename), true);
                 foreach ($json_file_decoded as $key => $value) {
@@ -280,7 +282,7 @@ class Smark
                 }
             }
         } else {
-            echo "File doesn't exists or filename extension error";
+            self::handleError("The file you are attempting to access either does not exist in the specified directory, or there has been an error related to the filename extension, preventing the system from recognizing the file type and subsequently accessing its contents.");
         }
     }
 
@@ -289,7 +291,7 @@ class Smark
             $check_if_the_file_extension_is_json = explode('.', $json_filename);
             $end_of_the_exploded_json_file = strtolower(end($check_if_the_file_extension_is_json));
             if($end_of_the_exploded_json_file != 'json'){ // IF FILE EXTENSION IS NOT JSON
-                echo "File extension error. It must be a .json file.";
+                self::handleError("File extension error. It must be a .json file.");
             } else {
                 $json_file_decoded = json_decode(file_get_contents($json_filename), true);
                 foreach ($json_file_decoded as $key => $value) {
@@ -302,7 +304,7 @@ class Smark
                 }
             }
         } else {
-            echo "File doesn't exists or filename extension error";
+            self::handleError("The file you are attempting to access either does not exist in the specified directory, or there has been an error related to the filename extension, preventing the system from recognizing the file type and subsequently accessing its contents.");
         }
     }
 
@@ -488,5 +490,36 @@ class Smark
                 echo "There was an error uploading the file";
             }
         }
+    }
+
+    private static function handleError($message) {
+        echo <<<HTML
+        <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Error</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f8d7da;
+                        color: #721c24;
+                        padding: 20px;
+                        border: 1px solid #f5c6cb;
+                        border-radius: 5px;
+                    }
+                    h1 {
+                        color: #c7254e;
+                    }
+                </style>
+            </head>
+                <body>
+                    <h1>Error</h1>
+                    <p>$message</p>
+                </body>
+            </html>
+        HTML;
+        exit; // Stop execution after displaying the error
     }
 }
