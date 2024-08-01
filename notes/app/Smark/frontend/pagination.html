@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="./pagination/bootstrap.min.css" rel="stylesheet">
+
+    <script src="./pagination/jquery3.5.1.min.js"></script>
+    <script src="./pagination/bootstrap.min.js"></script>
+    <title>Pagination</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-4">Pagination with Search and Adjustable Results</h2>
+        <div class="form-group">
+            <label for="search">Search:</label>
+            <input type="text" id="search" class="form-control" placeholder="Search in table...">
+        </div>
+        <div class="form-group">
+            <label for="show-entries">Show entries:</label>
+            <select id="show-entries" class="form-control">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Table rows will be inserted here dynamically -->
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- Pagination items will be inserted here dynamically -->
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        let data = generateDummyData(50); // Generate 50 dummy data entries
+        let currentPage = 1;
+        let rowsPerPage = 5;
+        let maxPages = 10; // Maximum number of pagination buttons to display
+
+        function generateDummyData(num) {
+            let dummyData = [];
+            for (let i = 1; i <= num; i++) {
+                dummyData.push({
+                    id: i,
+                    name: 'Name ' + i,
+                    email: 'email' + i + '@example.com'
+                });
+            }
+            return dummyData;
+        }
+
+        function displayTable(data, wrapper, rowsPerPage, page) {
+            wrapper.html("");
+            page--;
+
+            let start = rowsPerPage * page;
+            let end = start + rowsPerPage;
+            let paginatedItems = data.slice(start, end);
+
+            for (let i = 0; i < paginatedItems.length; i++) {
+                let item = paginatedItems[i];
+                let row = `<tr>
+                            <td>${item.id}</td>
+                            <td>${item.name}</td>
+                            <td>${item.email}</td>
+                        </tr>`;
+                wrapper.append(row);
+            }
+        }
+
+        function setupPagination(data, wrapper, rowsPerPage) {
+            wrapper.html("");
+            let pageCount = Math.ceil(data.length / rowsPerPage);
+            let currentPageGroup = Math.ceil(currentPage / maxPages);
+            let startPage = (currentPageGroup - 1) * maxPages + 1;
+            let endPage = Math.min(currentPageGroup * maxPages, pageCount);
+
+            let prevButton = $('<li class="page-item"><a class="page-link" href="#">Prev</a></li>');
+            if (currentPage > 1) {
+                prevButton.on('click', function() {
+                    currentPage--;
+                    displayTable(data, $('#table-body'), rowsPerPage, currentPage);
+                    setupPagination(data, $('#pagination'), rowsPerPage);
+                });
+            } else {
+                prevButton.addClass('disabled');
+            }
+            wrapper.append(prevButton);
+
+            for (let i = startPage; i <= endPage; i++) {
+                let btn = paginationButton(i, data);
+                wrapper.append(btn);
+            }
+
+            let nextButton = $('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+            if (currentPage < pageCount) {
+                nextButton.on('click', function() {
+                    currentPage++;
+                    displayTable(data, $('#table-body'), rowsPerPage, currentPage);
+                    setupPagination(data, $('#pagination'), rowsPerPage);
+                });
+            } else {
+                nextButton.addClass('disabled');
+            }
+            wrapper.append(nextButton);
+        }
+
+        function paginationButton(page, data) {
+            let button = $('<li class="page-item"><a class="page-link">' + page + '</a></li>');
+
+            if (currentPage == page) button.addClass('active');
+
+            button.on('click', function() {
+                currentPage = page;
+                displayTable(data, $('#table-body'), rowsPerPage, currentPage);
+
+                $('.pagination li').removeClass('active');
+                button.addClass('active');
+            });
+
+            return button;
+        }
+
+        $('#show-entries').change(function() {
+            rowsPerPage = parseInt($(this).val());
+            currentPage = 1;
+            displayTable(data, $('#table-body'), rowsPerPage, currentPage);
+            setupPagination(data, $('#pagination'), rowsPerPage);
+        });
+
+        $('#search').on('keyup', function() {
+            let value = $(this).val().toLowerCase();
+            let filteredData = data.filter(item =>
+                item.name.toLowerCase().includes(value) ||
+                item.email.toLowerCase().includes(value)
+            );
+            currentPage = 1;
+            displayTable(filteredData, $('#table-body'), rowsPerPage, currentPage);
+            setupPagination(filteredData, $('#pagination'), rowsPerPage);
+        });
+
+        displayTable(data, $('#table-body'), rowsPerPage, currentPage);
+        setupPagination(data, $('#pagination'), rowsPerPage);
+    </script>
+</body>
+</html>

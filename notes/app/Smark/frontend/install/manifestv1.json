@@ -1,0 +1,22 @@
+{
+    "short_name": "App",
+    "name": "My App",
+    "description": "Lorem ipsum app manifest",
+    "icons": [
+        {
+            "src": "./logo/logo-96x96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "./logo/logo-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "theme_color": "#000",
+    "start_url": "http://localhost/FRAMEWORKS/Little_Babe/",
+    "display": "standalone",
+    "background_color": "#000",
+    "orientation": "portrait"
+}

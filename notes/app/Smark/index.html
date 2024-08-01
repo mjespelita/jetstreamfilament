@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smark Documentation</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            /* overflow: hidden; */
+            word-wrap: normal;
+        }
+
+        span {
+            padding: 10px;
+            background: rgb(156, 156, 156);
+            color: rgb(255, 255, 255);
+            border-radius: 50px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Smark</h1>
+            <i>Develop with confidence.</i> <br> <br>
+            <a href="#compute">compute()</a> <br>
+            <a href="#isEven">isEven()</a> <br>
+            <a href="#linearRegression">linearRegression()</a> <br>
+            <a href="#downloadExcel">downloadExcel()</a> <br>
+            <a href="#downloadExcelAs">downloadExcelAs()</a> <br>
+            <a href="#withUrl">withUrl()</a> <br>
+            <a href="#jsonRead">jsonRead()</a> <br>
+            <a href="#jsonPush">jsonPush()</a> <br>
+            <a href="#jsonUnshift">jsonUnshift()</a> <br>
+            <a href="#jsonUpdate">jsonUpdate()</a> <br>
+            <a href="#jsonDelete">jsonDelete()</a> <br>
+            <a href="#calculateTotalPrice">calculateTotalPrice()</a> <br>
+            <a href="#calculateBMI">calculateBMI()</a> <br>
+            <a href="#generateQRCode">generateQRCode()</a> <br>
+            <a href="#generateBarCode">generateBarCode()</a> <br>
+            <a href="#sendMail">sendMail()</a> <br>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <h3>Installation</h3>
+            <div>
+                <code>
+                    git clone git@github.com:24377965mjGithub/smark.git
+                </code>
+                <p>
+                    or download the zip file <a href="#">here</a>
+                </p>
+            </div>
+            <hr>
+            <div>
+                <p>
+                    <b>For Laravel</b> <br> <br>
+                    Paste the <code>Smark</code> folder inside the <code>app/</code> folder.
+                </p>
+                <img src="./docs/1.PNG" alt="">
+            </div>
+            <hr>
+            <div>
+                <p>
+                    <b>Create a service provider</b> <br> <br>
+                    Go to the terminal and type: <code>php artisan make:provider SmarkServiceProvider</code> <br> <br>
+                    Register the Smark class on the SmarkServiceProvider. <br>
+<pre>$this->app->singleton(SmarkServiceProvider::class, function ($app) {
+        return Smark::class;
+});</pre>
+                </p>
+                <img src="./docs/2.PNG" alt="">
+            </div>
+            <hr>
+            <h3>Basic Usage</h3>
+            <div id="compute">
+                <h2>Computation</h2>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::compute(method, array of numbers (as many as you want))</code>
+                </p>
+                <p>
+                    <b>Addition</b> <br> <br>
+                    <code>Smark::compute('add', [2, 3, 4, 5])</code> <br> <br>
+                    Output: 14
+                </p>
+                <p>
+                    <b>Subtraction</b> <br> <br>
+                    <code>Smark::compute('minus', [5, 4])</code> <br> <br>
+                    Output: 1
+                </p>
+                <p>
+                    <b>Multiplication</b> <br> <br>
+                    <code>Smark::compute('multiply', [5, 4])</code> <br> <br>
+                    Output: 25
+                </p>
+                <p>
+                    <b>Division</b> <br> <br>
+                    <code>Smark::compute('divide', [4, 2])</code> <br> <br>
+                    Output: 2
+                </p>
+                <p id="isEven">
+                    <b>isEven()</b> <br> <br>
+                    <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                        Syntax: <br>
+                        <code>Smark::isEven(number)</code>
+                    </p>
+                    <code>Smark::isEven(24)</code> <br> <br>
+                    Output: true or 1
+                </p>
+                <p id="linearRegression">
+                    <b>linearRegression()</b> <br> <br>
+                    <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                        Syntax: <br>
+                        <code>Smark::linearRegression(xAxis array, yAxis array, result type)</code>
+                    </p>
+                    <code>Smark::linearRegression([1, 4, 3, 4, 5, 6], [2, 3, 4, 5, 6, 8], 'slope')</code> <br> <br>
+                    Output: 1.1235955056179776 <br> <br>
+                    <code>Smark::linearRegression([1, 4, 3, 4, 5, 6], [2, 3, 4, 5, 6, 8], 'intercept')</code> <br> <br>
+                    Output: 0.3595505617977525 <br> <br>
+                    <code>Smark::linearRegression([1, 4, 3, 4, 5, 6], [2, 3, 4, 5, 6, 8], 'all')</code> <br> <br>
+                    Output: <code>{"slope":1.1235955056179776,"intercept":0.3595505617977525}</code> <br> <br>
+                </p>
+            </div>
+            <hr>
+            <h3>Reporting</h3>
+            <p>
+                Smark library offers an exceptional solution for exporting data to Excel, providing a robust and user-friendly experience. With its seamless integration and efficient functionality, this library ensures that exporting data is both quick and reliable. Whether for simple data exports or more complex tasks, Smark library stands out as a dependable tool that enhances productivity and simplifies workflows.
+            </p>
+            <div id="downloadExcel">
+                <b>downloadExcel()</b>
+
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::downloadExcel(array(array of headers), array(array of data to be inserted))</code>
+                </p>
+<pre>Smark::downloadExcel(array(
+    array(
+        'name' => 'Name',
+        'email' => 'Email'
+    )
+), App\Models\User::select('name', 'email')->get())</pre>
+                <p>
+                    Output:
+                </p>
+                <img src="./docs/3.PNG" alt="">
+            </div>
+            <br>
+            <div id="downloadExcelAs">
+                <b>downloadExcelAs()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::downloadExcelAs(filename, array(array of headers), array(array of data to be inserted))</code>
+                </p>
+<pre>Smark::downloadExcelAs('myReport', array(
+    array(
+        'name' => 'Name',
+        'email' => 'Email'
+    )
+), App\Models\User::select('name', 'email')->get())</pre>
+                <p>
+                    Output:
+                </p>
+                <img src="./docs/4.PNG" alt="">
+            </div>
+            <hr>
+            <h3>String URL highlighter</h3>
+            <p>
+                A string URL highlighter is a function  that scans a given text and automatically detects and highlights URLs by converting them into clickable hyperlinks. This tool enhances text by making URLs interactive, improving user experience and functionality. The implementation typically involves using regular expressions to identify URLs and then wrapping them in HTML <code>a</code> tags for highlighting.
+            </p>
+            <div id="withUrl">
+                <b>withUrl()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::withUrl(string)</code>
+                </p>
+<pre>Smark::withUrl('Hello, https://google.com')</pre>
+                <p>
+                    Output: Hello <a href="https://google.com">https://google.com</a>
+                </p>
+            </div>
+            <hr>
+            <h3>JSON File CRUD</h3>
+            <p>
+                A JSON file CRUD (Create, Read, Update, Delete) operation involves managing data stored in JSON file. This set of functions allows you to perform basic data operations, such as creating new entries, reading existing data, updating specific records, and deleting unwanted entries.
+            </p>
+            <div id="jsonRead">
+                <i>In this case, I created a JSON file inside the public/json folder. <code>public/json/sample.json</code></i> <br> <br>
+                <b>jsonRead()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::jsonRead(json file directory)</code>
+                </p>
+<pre>Smark::jsonRead('json/sample.json')</pre>
+
+                <p>
+                    Output: []
+                </p>
+            </div>
+            <div id="jsonPush">
+                <b>jsonPush()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::jsonPush(json file directory, data)</code>
+                </p>
+                <small>Adding a new value to the end of the array.</small>
+<pre>Smark::jsonPush('json/sample.json', ['id' => 1, 'name' => 'Mark Jason'])</pre>
+
+                <p>
+                    Output: <code>[{"id": 1, "name": "Mark Jason"}]</code>
+                </p>
+            </div>
+            <div id="jsonUnshift">
+                <b>jsonUnshift()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::jsonUnshift(json file directory, data)</code>
+                </p>
+                <small>Adding a new value in the beginning of the array.</small>
+<pre>Smark::jsonUnshift('json/sample.json', ['id' => 0, 'name' => 'Mark Jason'])</pre>
+
+                <p>
+                    Output: <code>[{"id": 0, "name": "Mark Jason"}, {"id": 1, "name": "Mark Jason"}]</code>
+                </p>
+            </div>
+            <div id="jsonDelete">
+                <b>jsonDelete()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::jsonDelete(json file directory, key, target value (string, integer or float))</code>
+                </p>
+                <small>Deleting an item in the array.</small>
+<pre>Smark::jsonDelete('json/sample.json', 'id', 0)</pre>
+
+                <p>
+                    Output: <code>[{"id": 1, "name": "Mark Jason"}]</code>
+                </p>
+            </div>
+            <div id="jsonUpdate">
+                <b>jsonUpdate()</b>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::jsonUpdate(json file directory, key, value (string, integer or float), target key, target value (string, integer or float))</code>
+                </p>
+                <small>Update an item in the array.</small>
+<pre>Smark::jsonUpdate('json/sample.json', 'id', 1, 'name', 'Mark Jason Updated')</pre>
+
+                <p>
+                    Output: <code>[{"id": 1, "name": "Mark Jason Updated"}]</code>
+                </p>
+            </div>
+            <hr>
+
+            <!-- other functions -->
+
+            <h3>Other available functions</h3>
+            <div id="calculateTotalPrice">
+                <b>calculateTotalPrice()</b>
+                <p>
+                    A function that calculates the total price of an order after applying discounts and tax.
+                </p>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::calculateTotalPrice([array of orders ('price', 'quantity')], discount threshold, discount (percentage to decimal), tax (percentage to decimal))</code>
+                </p>
+<pre>Smark::calculateTotalPrice([
+    ['price' => 20, 'quantity' => 3],  // $60
+    ['price' => 50, 'quantity' => 2]   // $100
+], 100, 0.10, 0.05)</pre>
+
+                <p>
+                    Output: <code>151.2</code>
+                </p>
+
+                <p>
+                    Explanation: If the subtotal exceeds $100, apply a 10% discount. Apply a 5% tax on the discounted subtotal.
+                </p>
+            </div>
+
+            <hr>
+
+            <div id="calculateBMI">
+                <b>calculateBMI()</b>
+                <p>
+                    A function that calculates the Body Mass Index (BMI). The function takes two arguments: weight (in kilograms) and height (in meters).
+                </p>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::calculateBMI(weight (kilograms), height (meters))</code>
+                </p>
+<pre>Smark::calculateBMI(70, 1.5)</pre>
+
+                <p>
+                    Output: <code>31.11</code>
+                </p>
+
+                <p>
+                    Explanation: The BMI is calculated using the formula: BMI = weight / (height * height). The result is rounded to two decimal places for better readability.
+                </p>
+            </div>
+            <hr>
+
+            <div id="generateQRCode">
+                <b>generateQRCode()</b>
+                <p>
+                    A function that generates QR Code.
+                </p>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::generateQRCode(data)</code>
+                </p>
+
+                <img src="./docs/5.png" alt="">
+
+                <p>
+                    Output:
+                </p>
+
+                <img src="./docs/6.png" alt="">
+            </div>
+
+            <hr>
+
+            <div id="generateBarCode">
+                <b>generateBarCode()</b>
+                <p>
+                    A function that generates Bar Code. Read more about this library <a href="https://github.com/picqer/php-barcode-generator?tab=readme-ov-file">here.</a>
+                </p>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::generateBarCode(data)</code>
+                </p>
+
+<pre>Smark::generateBarCode('I love Smark!')</pre>
+
+                <p>
+                    Output:
+                </p>
+
+                <img src="./docs/7.png" alt="">
+            </div>
+
+            <hr>
+
+            <div id="sendMail">
+                <b>sendMail()</b>
+                <p>
+                    A function that sends an email. Read more about this library <a href="https://github.com/PHPMailer/PHPMailer">here.</a> Learn how to generate your own gmail App Password <a href="https://www.youtube.com/watch?v=74QQfPrk4vE">here</a>.
+                </p>
+                <p style="padding: 10px; border: 1px green; background-color: rgba(0, 128, 0, 0.19); border-radius: 10px;">
+                    Syntax: <br>
+                    <code>Smark::sendMail( <br> sender email, <br> sender email app password, <br> sent from email, <br> sent from name, <br> reciever email, <br> reply to email, <br> reply to name, <br> subject, <br> body (in HTML format) <br> )</code>
+                </p>
+
+<pre>Smark::sendMail(
+    'markjasonespelita@gmail.com',
+    '--secret--',
+    'markjasonespelita@gmail.com',
+    'Mark Jason Espelita',
+    'mark.medivadigital@gmail.com',
+    'markjasonespelita@gmail.com',
+    'Mark Jason Espelita',
+    'Hello World',
+    'Hi Mark, This is a sample message from Smark!'
+)</pre>
+
+                <img src="./docs/8.png" alt="">
+
+                <p>
+                    Output:
+                </p>
+
+                <img src="./docs/9.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 20px 0 20px 0; background-color: aliceblue; text-align: center;">
+        <div class="container">
+            Copyright Smark @ 2024
+        </div>
+    </footer>
+</body>
+</html>
