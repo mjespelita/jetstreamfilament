@@ -34,6 +34,6 @@ class SmarkTest extends Command
 
         // broadcast(new SampleEvent);
 
-        $this->info(Smark2::fibonacci(23));
+        print_r(Smark2::getWeekdays('2024-07-01', '2024-07-31'));
     }
 }

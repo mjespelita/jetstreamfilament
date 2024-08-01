@@ -2,6 +2,8 @@
 
 namespace App\Smark;
 
+use DateInterval;
+use DatePeriod;
 use DateTime;
 use GuzzleHttp\Client;
 
@@ -155,5 +157,25 @@ class Smark2
     public static function fibonacci($n) {
         if ($n <= 1) return $n;
         return self::fibonacci($n - 1) + self::fibonacci($n - 2);
+    }
+
+    public static function generateSlug($string) {
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string)));
+    }
+
+    public static function getWeekdays($startDate, $endDate) {
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            new DateTime($endDate)
+        );
+
+        $weekdays = [];
+        foreach ($period as $date) {
+            if (!in_array($date->format('N'), [6, 7])) {
+                $weekdays[] = $date->format('Y-m-d');
+            }
+        }
+        return $weekdays;
     }
 }
