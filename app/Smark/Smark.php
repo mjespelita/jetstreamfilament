@@ -163,9 +163,9 @@ class Smark
 
     // url highlighter
 
-    public static function withUrl($string)
+    public static function withURL($string)
     {
-        require 'url-highlighter/autoload.php';
+        require '../vendor/autoload.php';
         $urlHighlight = new UrlHighlight();
         return $urlHighlight->highlightUrls($string);
     }
@@ -338,17 +338,40 @@ class Smark
 
     public static function generateQRCode($data)
     {
-        require 'qrcode/vendor/autoload.php';
-        return (new QRCode())->render($data);
+        require '../vendor/autoload.php';
+
+        $out  = (new QRCode())->render($data); // -> data:image/webp;base64,...
+
+        return '<img alt="QRCode" src="'.$out.'" />';
     }
 
     // BARCODE
 
     public static function generateBarCode($data)
     {
-        require 'barcode/vendor/autoload.php';
+        require '../vendor/autoload.php';
         $generator = new BarcodeGeneratorHTML();
         return $generator->getBarcode($data, $generator::TYPE_CODE_128);
+    }
+
+    // RENDER HTML
+
+    public static function renderHTML($code) {
+        // Output HTML content using heredoc syntax
+        echo <<<HTML
+            $code
+        HTML;
+    }
+
+    public static function renderBase64Svg($base64String) {
+        // Construct the full data URI for the SVG
+        $dataUri = "data:image/svg+xml;base64," . $base64String;
+
+        // Create the HTML image tag with the data URI as the source
+        $html = '<img src="' . htmlspecialchars($dataUri, ENT_QUOTES) . '" alt="SVG Image" />';
+
+        // Return the HTML string
+        return $html;
     }
 
     // Mailer
