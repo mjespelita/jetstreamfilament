@@ -16,7 +16,9 @@ BY MARK JASON ESPELITA
 
 ./composer.json
     "php": "^8.2",
+    "chillerlan/php-qrcode": "^5.0",
     "filament/filament": "^3.2",
+    "guzzlehttp/guzzle": "^7.9",
     "laravel/framework": "^11.9",
     "laravel/jetstream": "^5.1",
     "laravel/pulse": "^1.2",
@@ -24,7 +26,9 @@ BY MARK JASON ESPELITA
     "laravel/sanctum": "^4.0",
     "laravel/tinker": "^2.9",
     "livewire/livewire": "^3.0",
-    "tecnickcom/tcpdf": "^6.7"
+    "picqer/php-barcode-generator": "^2.4",
+    "tecnickcom/tcpdf": "^6.7",
+    "vstelmakh/url-highlight": "^3.1"
 
 
 ***** COMMANDS *****
