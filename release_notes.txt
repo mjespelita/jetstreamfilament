@@ -80,6 +80,20 @@ BY MARK JASON ESPELITA
 
 ***** SMARK *****
 
+Math
+Excel
+PDFer
+HTML
+JSON
+Mail
+File
+Logging
+Payment
+Date
+Encryption
+Stringer
+Arrayer
+
 Math::compute()
 Math::isEven()
 Math::linearRegression()
