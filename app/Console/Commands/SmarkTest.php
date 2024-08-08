@@ -4,10 +4,9 @@ namespace App\Console\Commands;
 
 use App\Events\SampleEvent;
 use App\Mail\TestMail;
-use App\Smark\Smark;
-use App\Smark\Smark2;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use Smark\Smark\Dater;
 
 class SmarkTest extends Command
 {
@@ -34,6 +33,6 @@ class SmarkTest extends Command
 
         // broadcast(new SampleEvent);
 
-        print_r(Smark2::getWeekdays('2024-07-01', '2024-07-31'));
+        print_r(Dater::getWeekdays('08-11-1999', '08-08-2024'));
     }
 }

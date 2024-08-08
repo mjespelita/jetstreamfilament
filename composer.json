@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.0",
         "picqer/php-barcode-generator": "^2.4",
+        "smark/smark": "^0.0.5",
         "tecnickcom/tcpdf": "^6.7",
         "vstelmakh/url-highlight": "^3.1"
     },
