@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79784b3896532b681395faae86cd5885",
+    "content-hash": "751f67535af6aaa6354f675218964c25",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -6891,16 +6891,16 @@
         },
         {
             "name": "smark/smark",
-            "version": "v0.0.5",
+            "version": "v0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mjespelita/smark.git",
-                "reference": "0d2d402a72f23ac70f51e393332164ae881fcc75"
+                "reference": "625b24c90e2f747c3888cf5fa5e14967bae852aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mjespelita/smark/zipball/0d2d402a72f23ac70f51e393332164ae881fcc75",
-                "reference": "0d2d402a72f23ac70f51e393332164ae881fcc75",
+                "url": "https://api.github.com/repos/mjespelita/smark/zipball/625b24c90e2f747c3888cf5fa5e14967bae852aa",
+                "reference": "625b24c90e2f747c3888cf5fa5e14967bae852aa",
                 "shasum": ""
             },
             "require": {
@@ -6930,9 +6930,9 @@
             "description": "Smark PHP Library",
             "support": {
                 "issues": "https://github.com/mjespelita/smark/issues",
-                "source": "https://github.com/mjespelita/smark/tree/v0.0.5"
+                "source": "https://github.com/mjespelita/smark/tree/v0.0.7"
             },
-            "time": "2024-08-08T13:51:54+00:00"
+            "time": "2024-08-09T05:44:45+00:00"
         },
         {
             "name": "spatie/color",
@@ -12032,5 +12032,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
